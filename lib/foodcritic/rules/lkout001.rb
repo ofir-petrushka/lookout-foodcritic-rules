@@ -8,10 +8,18 @@ rule "LKOUT001", "Include a chefspec test for every recipe" do
 
     recipes.each do |r|
       recipe_name = File.basename(r, '.rb')
-      recipe_spec = File.join(cookbook_path, "spec/#{recipe_name}_spec.rb")
+      valid_spec_paths = [
+        "spec/recipes/#{recipe_name}_spec.rb",
+        "spec/#{recipe_name}_spec.rb"
+      ]
+      specs_exist = valid_spec_paths.any? do |p|
+        recipe_spec = File.join(cookbook_path, p)
+        File.exist?(recipe_spec)
+      end
 
-      unless File.exist?(recipe_spec)
-        matches << file_match(recipe_spec)
+      unless specs_exist
+        preferred_spec_path = File.join(cookbook_path, valid_spec_paths[0])
+        matches << file_match(preferred_spec_path)
       end
     end
 
