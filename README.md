@@ -8,13 +8,13 @@ Custom foodcritic rules used on chef recipes at Lookout.
 
 Add this line to your Gemfile in chef-repo:
 
-    gem 'foodcritic-rules'
+    gem 'lookout-foodcritic-rules', git: 'git@github.com:lookout/lookout-foodcritic-rules.git'
 
 And then execute `bundle` to install the gem.
 
 Or install it yourself:
 
-    $ gem install foodcritic-rules
+    $ gem install lookout-foodcritic-rules
 
 ## Usage
 
